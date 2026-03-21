@@ -47,24 +47,40 @@ const mapPayment = (row: any) => ({
 export const adminService = {
   async listUsers(): Promise<ApiResult<AdminUser[]>> {
     const res = await apiGet<any[]>(endpoints.admin.users)
-    return res.ok ? { ok: true, data: res.data.map(mapAdminUser) } : res
+    // return res.ok ? { ok: true, data: res.data.map(mapAdminUser) } : res
+    return res.ok ? { ok: true, data: res.data.map(mapAdminUser), status: res.status } : res
   },
   async getUserHistory(id: number): Promise<ApiResult<AdminUserHistory>> {
     const res = await apiGet<any>(endpoints.admin.userHistory(id))
     if (!res.ok) return res
+    // return {
+    //   ok: true,
+    //   data: {
+    //     user: {
+    //       id: Number(res.data.user.id),
+    //       name: res.data.user.name,
+    //       email: res.data.user.email,
+    //       role: res.data.user.role,
+    //       createdAt: res.data.user.created_at,
+    //     },
+    //     tickets: res.data.tickets.map(mapTicket),
+    //     payments: res.data.payments.map(mapPayment),
+    //   },
+    // }
     return {
-      ok: true,
-      data: {
-        user: {
-          id: Number(res.data.user.id),
-          name: res.data.user.name,
-          email: res.data.user.email,
-          role: res.data.user.role,
-          createdAt: res.data.user.created_at,
-        },
-        tickets: res.data.tickets.map(mapTicket),
-        payments: res.data.payments.map(mapPayment),
-      },
-    }
+  ok: true,
+  data: {
+    user: {
+      id: res.data.user.id,
+      name: res.data.user.name,
+      email: res.data.user.email,
+      role: res.data.user.role,
+      createdAt: res.data.user.createdAt,
+    },
+    tickets: res.data.tickets,
+    payments: res.data.payments,
+  },
+  status: res.status,
+}
   },
 }

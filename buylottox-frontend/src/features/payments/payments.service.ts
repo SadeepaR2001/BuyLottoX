@@ -23,11 +23,11 @@ const mapPayment = (row: any): Payment => ({
 export const paymentsService = {
   async listMine(): Promise<ApiResult<Payment[]>> {
     const res = await apiGet<any[]>(endpoints.payments.list)
-    return res.ok ? { ok: true, data: res.data.map(mapPayment) } : res
+return res.ok ? { ok: true, data: res.data.map(mapPayment), status: res.status } : res
   },
   async create(payload: CreatePaymentPayload): Promise<ApiResult<Payment>> {
     const res = await apiPost<any>(endpoints.payments.create, payload)
-    return res.ok ? { ok: true, data: mapPayment(res.data) } : res
+return res.ok ? { ok: true, data: mapPayment(res.data), status: res.status } : res
   },
   async uploadSlip(paymentId: number, file: File): Promise<ApiResult<Payment>> {
     try {
@@ -36,17 +36,15 @@ export const paymentsService = {
       const { data } = await http.post<ApiResult<any>>(endpoints.payments.slip(paymentId), form, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
-      return data.ok ? { ok: true, data: mapPayment(data.data) } : data
-    } catch (error: any) {
+return data.ok ? { ok: true, data: mapPayment(data.data), status: data.status } : data    } catch (error: any) {
       return { ok: false, error: error?.response?.data?.error || 'Upload failed' }
     }
   },
   async listAll(): Promise<ApiResult<Payment[]>> {
     const res = await apiGet<any[]>(endpoints.admin.payments)
-    return res.ok ? { ok: true, data: res.data.map(mapPayment) } : res
+return res.ok ? { ok: true, data: res.data.map(mapPayment), status: res.status } : res
   },
   async updateStatus(paymentId: number, status: PaymentStatus, notes?: string): Promise<ApiResult<Payment>> {
     const res = await apiPatch<any>(endpoints.admin.paymentUpdate(paymentId), { status, notes })
-    return res.ok ? { ok: true, data: mapPayment(res.data) } : res
-  },
+return res.ok ? { ok: true, data: mapPayment(res.data), status: res.status } : res  },
 }

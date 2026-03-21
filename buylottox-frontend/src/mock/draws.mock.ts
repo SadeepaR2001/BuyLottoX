@@ -12,13 +12,12 @@ export type Draw = {
 export async function getActive(): Promise<ApiResult<Draw>> {
   await sleep(150)
   const d = db.draws.find(x => x.status === 'OPEN') ?? db.draws[0]
-  return { ok: true, data: d }
+return { ok: true, data: d, status: 200 }
 }
 
 export async function listAll(): Promise<ApiResult<Draw[]>> {
   await sleep(150)
-  return { ok: true, data: [...db.draws].sort((a,b)=> b.drawAt.localeCompare(a.drawAt)) }
-}
+return { ok: true, data: [...db.draws].sort((a,b)=> b.drawAt.localeCompare(a.drawAt)), status: 200 }}
 
 function sleep(ms: number) {
   return new Promise((r) => setTimeout(r, ms))

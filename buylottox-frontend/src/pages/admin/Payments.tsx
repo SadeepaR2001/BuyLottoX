@@ -49,7 +49,7 @@ export default function AdminPayments() {
                 <div>
                   <div className="text-sm font-medium">{p.userName} • {p.ticketCode ?? `Payment #${p.id}`}</div>
                   <div className="mt-1 text-xs text-white/40">{p.userEmail} • {formatDateTime(p.createdAt)}</div>
-                  <div className="mt-2 text-sm text-white/60">Method: {p.method.replaceAll('_', ' ')} • Ref: {p.referenceNo || '—'}</div>
+                  <div className="mt-2 text-sm text-white/60">Method: {p.method.replace(/_/g, ' ')} • Ref: {p.referenceNo || '—'}</div>
                   <div className="mt-1 text-sm text-white/60">Slip: {p.slipPath ? p.slipPath : 'Not uploaded yet'}</div>
                   {p.adminNotes && <div className="mt-2 text-sm text-amber-200">Current note: {p.adminNotes}</div>}
                 </div>

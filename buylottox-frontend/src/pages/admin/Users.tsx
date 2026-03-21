@@ -89,7 +89,7 @@ export default function Users() {
                     <div className="flex items-center justify-between gap-3">
                       <div>
                         <div className="text-sm font-medium">{payment.ticketCode ?? `Payment #${payment.id}`}</div>
-                        <div className="text-xs text-white/45">{formatMoney(payment.amount)} • {payment.method.replaceAll('_', ' ')}</div>
+                        <div className="text-xs text-white/45">{formatMoney(payment.amount)} • {payment.method.replace(/_/g, ' ')}</div>
                       </div>
                       <Badge tone={payment.status === 'APPROVED' ? 'green' : payment.status === 'REJECTED' ? 'red' : 'yellow'}>{payment.status}</Badge>
                     </div>

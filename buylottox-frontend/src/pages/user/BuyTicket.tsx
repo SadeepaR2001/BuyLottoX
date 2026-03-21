@@ -64,7 +64,7 @@ export default function BuyTicket() {
           <div className="flex items-center justify-between gap-3">
             <h1 className="text-lg font-semibold">Pick your numbers</h1>
             <div className="flex items-center gap-2">
-              <Badge tone="purple">{selected.length}/{RULE.pick}</Badge>
+              <Badge tone="purple">{`${selected.length}/${RULE.pick}`}</Badge>
               <Button variant="secondary" onClick={randomPick}>Quick Pick</Button>
             </div>
           </div>

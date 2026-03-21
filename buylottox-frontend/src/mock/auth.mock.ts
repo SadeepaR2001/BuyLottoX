@@ -9,7 +9,7 @@ export async function login(payload: LoginPayload): Promise<ApiResult<{ token: s
   await sleep(250)
   const u = db.users.find(x => x.email.toLowerCase() === payload.email.toLowerCase())
   if (!u || u.password !== payload.password) return { ok: false, error: 'Invalid email or password' }
-  return { ok: true, data: { token: `mock_token_${u.id}`, user: pickUser(u) } }
+return { ok: true, data: { token: `mock_token_${u.id}`, user: pickUser(u) }, status: 200 }
 }
 
 export async function register(payload: RegisterPayload): Promise<ApiResult<{ token: string; user: AuthUser }>> {
@@ -18,7 +18,7 @@ export async function register(payload: RegisterPayload): Promise<ApiResult<{ to
   if (exists) return { ok: false, error: 'Email already registered' }
   const u = { id: uid('u'), name: payload.name, email: payload.email, password: payload.password, role: 'USER' as Role }
   db.users.push(u)
-  return { ok: true, data: { token: `mock_token_${u.id}`, user: pickUser(u) } }
+return { ok: true, data: { token: `mock_token_${u.id}`, user: pickUser(u) }, status: 200 }
 }
 
 export async function me(token: string | null): Promise<ApiResult<AuthUser>> {
@@ -27,12 +27,12 @@ export async function me(token: string | null): Promise<ApiResult<AuthUser>> {
   const id = token.replace('mock_token_', '')
   const u = db.users.find(x => x.id === id)
   if (!u) return { ok: false, error: 'Session expired' }
-  return { ok: true, data: pickUser(u) }
+return { ok: true, data: pickUser(u), status: 200 }
 }
 
 export async function logout(): Promise<ApiResult<true>> {
   await sleep(100)
-  return { ok: true, data: true }
+return { ok: true, data: true, status: 200 }
 }
 
 function pickUser(u: { id: string; name: string; email: string; role: Role }): AuthUser {

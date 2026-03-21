@@ -17,18 +17,18 @@ const mapDraw = (row: any): Draw => ({
 export const drawsService = {
   async getActive(): Promise<ApiResult<Draw>> {
     const res = await apiGet<any>(endpoints.draws.active)
-    return res.ok ? { ok: true, data: mapDraw(res.data) } : res
+return res.ok ? { ok: true, data: mapDraw(res.data), status: res.status } : res
   },
   async listAll(): Promise<ApiResult<Draw[]>> {
     const res = await apiGet<any[]>(endpoints.draws.list)
-    return res.ok ? { ok: true, data: res.data.map(mapDraw) } : res
+return res.ok ? { ok: true, data: res.data.map(mapDraw), status: res.status } : res
   },
   async create(payload: CreateDrawPayload): Promise<ApiResult<Draw>> {
     const res = await apiPost<any>(endpoints.draws.list, payload)
-    return res.ok ? { ok: true, data: mapDraw(res.data) } : res
+return res.ok ? { ok: true, data: mapDraw(res.data), status: res.status } : res
   },
   async close(id: number): Promise<ApiResult<Draw>> {
     const res = await apiPatch<any>(endpoints.draws.close(id))
-    return res.ok ? { ok: true, data: mapDraw(res.data) } : res
+return res.ok ? { ok: true, data: mapDraw(res.data), status: res.status } : res
   },
 }

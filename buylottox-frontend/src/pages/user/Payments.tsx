@@ -39,7 +39,7 @@ export default function Payments() {
                 <div>
                   <div className="text-sm font-medium">{p.ticketCode ?? `Payment #${p.id}`}</div>
                   <div className="mt-1 text-xs text-white/40">{formatDateTime(p.createdAt)}</div>
-                  <div className="mt-2 text-sm text-white/60">Method: {p.method.replaceAll('_', ' ')}</div>
+                  <div className="mt-2 text-sm text-white/60">Method: {p.method.replace(/_/g, ' ')}</div>
                   {p.referenceNo && <div className="text-sm text-white/60">Reference: {p.referenceNo}</div>}
                   {p.adminNotes && <div className="mt-2 text-sm text-amber-200">Admin note: {p.adminNotes}</div>}
                 </div>

@@ -21,14 +21,13 @@ const mapTicket = (row: any): Ticket => ({
 export const ticketsService = {
   async myTickets(): Promise<ApiResult<Ticket[]>> {
     const res = await apiGet<any[]>(endpoints.tickets.mine)
-    return res.ok ? { ok: true, data: res.data.map(mapTicket) } : res
+return res.ok ? { ok: true, data: res.data.map(mapTicket), status: res.status } : res
   },
   async create(payload: CreateTicketPayload): Promise<ApiResult<Ticket>> {
     const res = await apiPost<any>(endpoints.tickets.create, payload)
-    return res.ok ? { ok: true, data: mapTicket(res.data) } : res
+return res.ok ? { ok: true, data: mapTicket(res.data), status: res.status } : res
   },
   async updateStatus(id: number, status: TicketStatus, notes?: string): Promise<ApiResult<Ticket>> {
     const res = await apiPatch<any>(endpoints.tickets.update(id), { status, notes })
-    return res.ok ? { ok: true, data: mapTicket(res.data) } : res
-  },
+return res.ok ? { ok: true, data: mapTicket(res.data), status: res.status } : res  },
 }

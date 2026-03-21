@@ -14,8 +14,7 @@ export type CreateTicketPayload = { userId: string; drawId: string; numbers: num
 export async function myTickets(userId: string): Promise<ApiResult<Ticket[]>> {
   await sleep(200)
   const items = db.tickets.filter(t => t.userId === userId).map(strip)
-  return { ok: true, data: items.sort((a,b)=> b.createdAt.localeCompare(a.createdAt)) }
-}
+return { ok: true, data: items.sort((a,b)=> b.createdAt.localeCompare(a.createdAt)), status: 200 }}
 
 export async function createTicket(payload: CreateTicketPayload): Promise<ApiResult<Ticket>> {
   await sleep(250)
@@ -28,7 +27,7 @@ export async function createTicket(payload: CreateTicketPayload): Promise<ApiRes
     createdAt: new Date().toISOString(),
   }
   db.tickets.push(ticket)
-  return { ok: true, data: strip(ticket) }
+return { ok: true, data: strip(ticket), status: 200 }
 }
 
 function strip(t: any): Ticket {
