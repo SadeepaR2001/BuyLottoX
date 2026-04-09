@@ -1,40 +1,29 @@
-# BuyLottoX Backend (NestJS + Prisma + MySQL)
+# BuyLottoX Frontend
 
-## Requirements
-- Node.js 18+
-- MySQL 8+ (or compatible)
+React + Vite frontend for the BuyLottoX Next.js backend.
 
-## Setup
-1) Install dependencies
+## Features
+- Login / Register
+- USER dashboard
+- Buy ticket
+- My tickets
+- Create payment
+- Upload payment slip
+- ADMIN dashboard
+- Users list
+- User history
+- Payment review and approval
+- Draw management
+
+## Run
 ```bash
 npm install
+copy .env.example .env
+npm run dev
 ```
 
-2) Create a database in MySQL (example)
-```sql
-CREATE DATABASE buylottox;
-```
+The Vite dev server proxies `/api` to `http://localhost:4000` by default.
 
-3) Configure env
-```bash
-cp .env.example .env
-```
-Edit `DATABASE_URL` in `.env` to match your MySQL user/password/host/db.
-
-4) Run migrations + seed
-```bash
-npm run prisma:migrate
-npm run db:seed
-```
-
-5) Start API
-```bash
-npm run start:dev
-```
-
-- API: http://localhost:4000
-- CORS allowed: http://localhost:5173
-
-## Demo accounts (seed)
-- Admin: admin@buylottox.test / admin123
-- User:  user@buylottox.test / user1234
+## Demo accounts
+- Admin: `admin@buylottox.test` / `admin123`
+- User: `user@buylottox.test` / `user1234`
