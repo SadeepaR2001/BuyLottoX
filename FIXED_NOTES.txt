@@ -1,0 +1,5 @@
+Final frontend package:
+- Dashboard passes selected gridId to Buy Ticket page.
+- Buy Ticket page loads numbers/subtickets using the selected gridId.
+- Buy request posts to /grid/:selectedGridId/buy with gridId in payload.
+- Payment History page remains separated from buying flow.

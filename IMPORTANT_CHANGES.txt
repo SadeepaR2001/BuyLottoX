@@ -1,0 +1,1 @@
+Ensure VITE_API_URL and /payments endpoint usage.
